@@ -127,6 +127,7 @@ SELECT DISTINCT category, index
   JOIN schedule AS s
     ON s.lesson_week = m.lesson_week
    AND s.lesson_course = m.lesson_course
+    -- Change to desired date range
  WHERE date BETWEEN '2026-01-01' AND '2026-01-31'
  ORDER BY category, index;
 ```
