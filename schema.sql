@@ -13,7 +13,7 @@ CREATE TABLE cards (
     category VARCHAR(32),
     index    INTEGER,
              CONSTRAINT CK_positive_index
-	     CHECK(index > 0),
+             CHECK(index > 0),
     FOREIGN KEY (category)
         REFERENCES categories(name)
 );
@@ -32,7 +32,7 @@ CREATE TABLE lessons (
     course VARCHAR(2),
     theme  VARCHAR(64),
            CONSTRAINT CK_week_range
-	   CHECK(week BETWEEN 1 AND 37),
+           CHECK(week BETWEEN 1 AND 37),
     FOREIGN KEY (course)
         REFERENCES courses(name),
     FOREIGN KEY (theme, course)
@@ -45,14 +45,14 @@ CREATE TABLE materials (
     card_category VARCHAR(32),
     card_index    INTEGER,
                   CONSTRAINT UC_lesson_card
-		  UNIQUE (lesson_week, lesson_course,
-			  card_category, card_index),
+                  UNIQUE (lesson_week, lesson_course,
+                          card_category, card_index),
     FOREIGN KEY (lesson_week, lesson_course)
         REFERENCES lessons(week, course)
-	ON DELETE CASCADE,
+        ON DELETE CASCADE,
     FOREIGN KEY (card_category, card_index)
         REFERENCES cards (category, index)
-	ON DELETE CASCADE
+        ON DELETE CASCADE
 );
 
 CREATE TABLE schedule (
@@ -60,8 +60,8 @@ CREATE TABLE schedule (
     lesson_course VARCHAR(2),
     date          DATE,
                   CONSTRAINT UC_lesson_date
-		  UNIQUE (lesson_week, lesson_course, date),
+                  UNIQUE (lesson_week, lesson_course, date),
     FOREIGN KEY (lesson_week, lesson_course)
         REFERENCES lessons(week, course)
-	ON DELETE CASCADE
+        ON DELETE CASCADE
 );
